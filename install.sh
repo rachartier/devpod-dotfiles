@@ -1,17 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-sudo apt update
+if ! [ -d "$HOME/.cfg" ]; then
+    sudo apt update
 
-export DOTFILES_DOCKER=1
-export GIT_CLONE_METHOD=https
-export TERM=xterm
+    export DOTFILES_DOCKER=1
+    export GIT_CLONE_METHOD=https
+    export TERM=xterm
 
-if [ -d "$HOME/.cfg" ]; then
-    rm -rf "$HOME/.cfg"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
 fi
-
-if [ -d "$HOME/.zshrc" ]; then
-    rm -rf "$HOME/.zshrc"
-fi
-
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
